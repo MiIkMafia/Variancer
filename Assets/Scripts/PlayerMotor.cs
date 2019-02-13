@@ -64,6 +64,7 @@ public class PlayerMotor : MonoBehaviour {
 	public void ApplyThruster (Vector3 _thrusterForce)
 	{
 		thrusterForce = _thrusterForce;
+		
 	}
 
 	// Run every physics iteration
@@ -94,6 +95,7 @@ public class PlayerMotor : MonoBehaviour {
 
 		if (thrusterForce != Vector3.zero)
 		{
+			print(thrusterForce);
 			rb.AddForce(thrusterForce * Time.fixedDeltaTime, ForceMode.Acceleration);
 		}
 

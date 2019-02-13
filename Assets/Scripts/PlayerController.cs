@@ -192,20 +192,23 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 	}
-
+	
+	//LOCK ON CODE
 	public void LookAt()
 	{
 		if (Input.GetButton("Fire3"))
 		{
-			transform.LookAt(new Vector3 (-1.9f, 0.762f, 5.6f));
-			print("SOMETHING");
+			Vector3 _pos = (new Vector3 (-1.9f, 0.762f, 5.6f)) - transform.position; 
+			Quaternion _newRot = Quaternion.LookRotation(_pos);
+			transform.rotation = Quaternion.Lerp(transform.rotation, _newRot, Time.fixedDeltaTime * 20f);
 			xv.CannotLookAt(false);
 		}
-		else {xv.CannotLookAt(true);
-		Vector3 _tempRotation = transform.eulerAngles;
-		_tempRotation.x = 0f;
-		transform.localEulerAngles = _tempRotation;
-		
+		else 
+		{
+			xv.CannotLookAt(true);
+			Vector3 _tempRotation = transform.eulerAngles;
+			_tempRotation.x = 0f;	
+			transform.localEulerAngles = _tempRotation;
 		}
 
 	}
@@ -248,13 +251,16 @@ public class PlayerController : MonoBehaviour {
 	public void Jetpack()
 	{
 		Vector3 boostVector = Vector3.zero;
-		if(Input.GetButton ("Fire1") && isDisabled == false)
+		float _thrusterForce;
+		if(Input.GetButton("Jump") && isDisabled == false)
 		{
-			boostVector = thrusterForce * Vector3.up;
+			_thrusterForce = thrusterForce;
+			boostVector = _thrusterForce * Vector3.up;
 			ExpendEnergy(jetpackEnergyConsumption, 0);
 			xv.ApplyThruster(boostVector);
 		}
-		else if (zMov == 0) {boostVector = Vector3.zero; xv.ApplyThruster(boostVector); }
+		else if (zMov == 0) {boostVector = Vector3.zero;  xv.ApplyThruster(boostVector); }
+		else if (Input.GetButton("Fire1") != true) {_thrusterForce = 0f; xv.ApplyThruster(Vector3.zero);}
 		//else if (energyCurrent <= 0){print("works");}
 	}
 
@@ -269,7 +275,6 @@ public class PlayerController : MonoBehaviour {
 
 	IEnumerator Disable(float time)
 	{
-		print("WORKS");
 		if (isDisabled == false)
 		{isDisabled = true;}
 		yield return new WaitForSeconds(time);
@@ -306,6 +311,7 @@ public class PlayerController : MonoBehaviour {
 		if (_velocity == Vector3.zero && currentSpeed != 0 && velocityCopy.z == 0)
 		{
 			_velocity = velocityCopy;
+			//print(velocityCopy);
 		}
 		else if (currentSpeed == 0)
 		{
@@ -313,7 +319,7 @@ public class PlayerController : MonoBehaviour {
 		}
 		else 
 		{velocityCopy = _velocity;}
-
+		
 
 
 		//Apply movement

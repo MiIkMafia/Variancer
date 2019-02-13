@@ -47,7 +47,6 @@ public class PlayerShoot : NetworkBehaviour {
 				Debug.DrawRay(cam.transform.position, _distance, Color.white, 200f, true);
 				_distance.y = _distance.y - 1f;
 				Debug.DrawRay(cam.transform.position, _distance, Color.blue, 200f, true);
-				print(_hit.transform.name);
 				//Vector3 _actualLocation = 
 				
 			}
