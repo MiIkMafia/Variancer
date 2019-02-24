@@ -4,9 +4,10 @@ using UnityEngine;
 using System.IO;
 using SimpleJSON;
 
-public class MyPlayerData : MonoBehaviour {
+[System.Serializable]
+public class MyPlayerData {
 
-    
+//GAME OBJECTS (SHIFT TO PLAYERCONTROLLER?)
     [SerializeField] private GameObject armL;
     [SerializeField] private GameObject armR;
     [SerializeField] private GameObject core;
@@ -22,7 +23,7 @@ public class MyPlayerData : MonoBehaviour {
     private string coreName;
     private string jetpackName;
     private string weaponSlot1Name;
-
+    JSONObject currentParts = new JSONObject();
     //For future
 
     //private GameObject weaponSlot5;
@@ -30,7 +31,7 @@ public class MyPlayerData : MonoBehaviour {
     //private GameObject weaponSlot7;
     //private GameObject weaponSlot8;
 
-
+//STRINGS
     private GameObject toolSlot1;
     private GameObject toolSlot2;
 
@@ -53,7 +54,7 @@ public class MyPlayerData : MonoBehaviour {
     private string StoolSlot1;
     private string StoolSlot2;
 
-
+//FINAL MECH VALUES
     [SerializeField] private int speed;
     [SerializeField] private int health;
     [SerializeField] private int shield;     //To be used with non regenerating shield
@@ -62,18 +63,39 @@ public class MyPlayerData : MonoBehaviour {
     [SerializeField] private int energyRegeneration;
     [SerializeField] private int mass;
     
-    //JSON STUFF
-    static private string allPartsPath = Application.persistentDataPath + "/AllParts.json";
-    private string currentPath = Application.persistentDataPath + "/CurrentParts.json";
-    static string jsonString = File.ReadAllText(allPartsPath);
-    JSONObject allParts = (JSONObject)JSON.Parse(jsonString);
+//JSON STUFF
+    static private string allPartsPath;  
+    static private string currentPath;  
+    static string jsonString;
+    JSONObject allParts;
     
 
-    //FUNCTIONS
-
-    void Save()
+//FUNCTIONS
+    public void UnlockParts(string part)
     {
+        
+        //take part name, 
+        allParts[part]["unlocked"] = true;
+    }
+    public void Save()
+    {
+//USING ALLPARTS UPDATE CURRENT PARTS
+    
+        currentParts["armL"]["name"] = armL.name;
+        currentParts["armR"]["name"] = armR.name;
+        currentParts["legL"]["name"] = legL.name;
+        currentParts["legR"]["name"] = legR.name;
+        currentParts["weaponSlot1"]["name"] = weaponSlot1.name;
+        currentParts["weaponSlot2"]["name"] = weaponSlot2.name;
+        currentParts["weaponSlot3"]["name"] = weaponSlot3.name;
+        currentParts["weaponSlot4"]["name"] = weaponSlot4.name;
+        currentParts["toolSlot1"]["name"] = toolSlot1.name;
+        currentParts["toolSlot2"]["name"] = toolSlot2.name;
+        currentParts["jetPack"]["name"] = jetPack.name;
+
+
     /*  JSONObject playerJson = new JSONObject();
+        
         playerJson.Add("armL", SarmL);
         playerJson.Add("armR", SarmR);
         playerJson.Add("legL", SlegL);
@@ -94,9 +116,28 @@ public class MyPlayerData : MonoBehaviour {
         
     }
 
-    void UpdateParts()
+    
+    
+    public void SetPath()
     {
-        JSONObject currentParts = new JSONObject();
+        allPartsPath =  Application.persistentDataPath + "/AllParts.json";
+        currentPath = Application.persistentDataPath + "/CurrentParts.json";
+        jsonString = File.ReadAllText(allPartsPath);
+        allParts = (JSONObject)JSON.Parse(jsonString);
+    }
+    
+
+    /* public string DisplayPartsDetails()
+    {
+        string name = "01A";
+        
+        return(allParts["01A"]);
+        
+    }*/
+
+    public void UpdateParts()
+    {
+        
         if (SarmL != currentParts["name"])
         {
             currentParts["name"] = SarmL;
@@ -147,12 +188,23 @@ public class MyPlayerData : MonoBehaviour {
      
 
 
-    void Load() 
+    public void Load() 
     {
         
-
+        SarmL = currentParts["armL"]["name"];
+        SarmR = currentParts["armR"]["name"];
+        SlegL = currentParts["legL"]["name"];
+        SlegR = currentParts["legR"]["name"];
+        SweaponSlot1 = currentParts["weaponSlot1"]["name"];
+        SweaponSlot2 = currentParts["weaponSlot2"]["name"];
+        SweaponSlot3 = currentParts["weaponSlot3"]["name"];
+        SweaponSlot4 = currentParts["weaponSlot4"]["name"];
+        StoolSlot1 = currentParts["toolSlot1"]["name"];
+        StoolSlot1 = currentParts["toolSlot2"]["name"]; 
+        StoolSlot1 = currentParts["jetPack"]["name"]; 
         //SET ARM NAME
-        //SarmName = allParts["01A"]["name"];
-        
+        //SarmName = currentParts["01A"]["name"];
+        //SET ALL PART NAMES FROM currentParts
+        //INSTANTIATE GAMEOBJECTS LATER IN PLAYERCONTROLLER(?)
     }
 }

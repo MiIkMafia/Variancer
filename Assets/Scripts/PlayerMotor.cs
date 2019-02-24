@@ -16,7 +16,7 @@ public class PlayerMotor : MonoBehaviour {
 	private Vector3 thrusterForce = Vector3.zero;
 	private float xMov = 0;
 	private float zMov = 0;
-	private bool rotationEnabled = true;
+	public bool rotationEnabled = true;
 
 	[SerializeField]
 	private float cameraRotationLimit = 85f;
@@ -42,10 +42,12 @@ public class PlayerMotor : MonoBehaviour {
 		rotationEnabled = state;
 	}
 
-	// Gets a movement vector
 	public void Move (Vector3 _velocity)
+
 	{
+
 		velocity = _velocity;
+
 	}
 
 	// Gets a rotational vector
@@ -83,9 +85,7 @@ public class PlayerMotor : MonoBehaviour {
 	//Perform movement based on velocity variable
 	void PerformMovement ()
 	{
-		Vector3 _velocity = velocity;
 		
-
 		if (velocity != Vector3.zero)
 		{
 			rb.MovePosition(rb.position + velocity * Time.fixedDeltaTime);
