@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour {
 
 //DRONES AND TOOLS
 
+//FIX OPPOSITE ADAD MOVEMENT (INVERT DEACCELERATION)
 
 
 
@@ -293,7 +294,28 @@ public class PlayerController : MonoBehaviour {
 
 
 //ENERGY FUNCTIONS
+	public void Load()
+	{data.Load();}
 
+	public void Save()
+	{
+		data.Save();
+	}
+
+	public void SetPath()
+	{
+		data.SetPath();
+	}
+
+	public void UpdateParts()
+	{
+		data.UpdateParts();
+	}
+
+	public void UnlockParts()
+	{
+		data.UnlockParts();
+	}
 	public void ExpendEnergy(float energyToExpend, int mode)
 
 	{
