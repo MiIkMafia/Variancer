@@ -25,6 +25,12 @@ public class PlayerController : MonoBehaviour {
 
 
 	public MyPlayerData data;
+//STATS FROM MyPlayerData
+	
+
+
+
+
 //PLAYER STATS
 
 	[SerializeField]
@@ -154,6 +160,8 @@ public class PlayerController : MonoBehaviour {
 		xv = GetComponent<PlayerMotor>();	
 
 	    _speed = maxSpeed;
+		data.SetDefaults();
+		data.SetPartValues();
 
 	}
 
@@ -175,6 +183,10 @@ public class PlayerController : MonoBehaviour {
 
 	}
 
+	private void CalcTotalMass()
+	{
+		
+	}
 
 
 	public void Final()
@@ -314,6 +326,7 @@ public class PlayerController : MonoBehaviour {
 
 	public void UnlockParts()
 	{
+		
 		data.UnlockParts();
 	}
 	public void ExpendEnergy(float energyToExpend, int mode)

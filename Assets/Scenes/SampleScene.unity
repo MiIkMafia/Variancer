@@ -1403,12 +1403,12 @@ Prefab:
     - target: {fileID: 114791934244273900, guid: e6fe3f09e244a554eb63c7c4ce9b2fc2,
         type: 2}
       propertyPath: acceleration
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114791934244273900, guid: e6fe3f09e244a554eb63c7c4ce9b2fc2,
         type: 2}
       propertyPath: lookSensitivity.x
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4288855437861906, guid: e6fe3f09e244a554eb63c7c4ce9b2fc2, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1417,16 +1417,62 @@ Prefab:
     - target: {fileID: 114791934244273900, guid: e6fe3f09e244a554eb63c7c4ce9b2fc2,
         type: 2}
       propertyPath: lookSensitivity.y
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 54922948959673518, guid: e6fe3f09e244a554eb63c7c4ce9b2fc2,
         type: 2}
       propertyPath: m_Constraints
       value: 112
       objectReference: {fileID: 0}
+    - target: {fileID: 114791934244273900, guid: e6fe3f09e244a554eb63c7c4ce9b2fc2,
+        type: 2}
+      propertyPath: maxSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 114791934244273900, guid: e6fe3f09e244a554eb63c7c4ce9b2fc2,
+        type: 2}
+      propertyPath: _speed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114791934244273900, guid: e6fe3f09e244a554eb63c7c4ce9b2fc2,
+        type: 2}
+      propertyPath: thrusterForce
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 114791934244273900, guid: e6fe3f09e244a554eb63c7c4ce9b2fc2,
+        type: 2}
+      propertyPath: reflex
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114791934244273900, guid: e6fe3f09e244a554eb63c7c4ce9b2fc2,
+        type: 2}
+      propertyPath: speedMaxLateralModifier
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114791934244273900, guid: e6fe3f09e244a554eb63c7c4ce9b2fc2,
+        type: 2}
+      propertyPath: energyCurrent
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114791934244273900, guid: e6fe3f09e244a554eb63c7c4ce9b2fc2,
+        type: 2}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 257068128}
+    - target: {fileID: 114791934244273900, guid: e6fe3f09e244a554eb63c7c4ce9b2fc2,
+        type: 2}
+      propertyPath: xv
+      value: 
+      objectReference: {fileID: 1236417172}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6fe3f09e244a554eb63c7c4ce9b2fc2, type: 2}
   m_IsPrefabAsset: 0
+--- !u!114 &1236417172 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114325028013089348, guid: e6fe3f09e244a554eb63c7c4ce9b2fc2,
+    type: 2}
+  m_PrefabInternal: {fileID: 1236417171}
+  m_Script: {fileID: 11500000, guid: e5c22070ffbd5c24896ed1acda3c69dc, type: 3}
 --- !u!1 &1375737368 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1541030432416902, guid: e6fe3f09e244a554eb63c7c4ce9b2fc2,

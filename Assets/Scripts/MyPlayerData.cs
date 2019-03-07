@@ -55,13 +55,13 @@ public class MyPlayerData {
     private string StoolSlot2;
 
 //FINAL MECH VALUES
-    [SerializeField] private int speed;
-    [SerializeField] private int health;
-    [SerializeField] private int shield;     //To be used with non regenerating shield
-    [SerializeField] private int energy;     // Works as both shield and booster energy
-    [SerializeField] private int acceleration;
-    [SerializeField] private int energyRegeneration;
-    [SerializeField] private int mass;
+    [SerializeField] public int speed = 0;
+    [SerializeField] public int health = 0;
+    [SerializeField] public int shield = 0;     //To be used with non regenerating shield
+    [SerializeField] public int energy = 0;     // Works as both shield and booster energy
+    [SerializeField] public int acceleration = 0;
+    [SerializeField] public int energyRegeneration = 0;
+    [SerializeField] public int mass = 0;
     
 //JSON STUFF
     static private string allPartsPath;  
@@ -71,11 +71,33 @@ public class MyPlayerData {
     
 
 //FUNCTIONS
-    public void UnlockParts(string part)
+    public void SetPartValues()
+    {
+        for(int i = 0; i < currentParts.Count; i++) 
+        {
+            string name = currentParts[i];
+            if (allParts[name]["mass"] != null)
+            {mass = mass + allParts[name]["mass"]; }
+        }
+    } 
+
+    public void SetDefaults()
+    {
+        for (int i = 0; i < currentParts.Count; i++) //BAD PRACTICE
+        {
+            if (currentParts[i] != null)
+            {
+                {
+                    currentParts[i]["name"] = allParts[i]["name"];
+                }
+            }
+        }
+    }
+    public void UnlockParts() //string part
     {
         
         //take part name, 
-        allParts[part]["unlocked"] = true;
+        //allParts[part]["unlocked"] = true;
     }
     public void Save()
     {
