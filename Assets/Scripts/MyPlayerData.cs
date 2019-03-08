@@ -23,7 +23,6 @@ public class MyPlayerData {
     private string coreName;
     private string jetpackName;
     private string weaponSlot1Name;
-    JSONObject currentParts = new JSONObject();
     //For future
 
     //private GameObject weaponSlot5;
@@ -40,7 +39,7 @@ public class MyPlayerData {
     //private GameObject toolSlot4;
     //private GameObject toolSlot5;
 
-    [SerializeField] private string SarmL;
+    [SerializeField] public string SarmL;
     [SerializeField] private string SarmR;
     [SerializeField] private string Score;
     [SerializeField] private string SlegL;
@@ -66,8 +65,10 @@ public class MyPlayerData {
 //JSON STUFF
     static private string allPartsPath;  
     static private string currentPath;  
-    static string jsonString;
-    JSONObject allParts;
+    static string allPartsJsonString;
+    static string currentPartsJsonString;
+    public JSONObject allParts;
+    public JSONObject currentParts;
     
 
 //FUNCTIONS
@@ -83,7 +84,8 @@ public class MyPlayerData {
 
     public void SetDefaults()
     {
-        for (int i = 0; i < currentParts.Count; i++) //BAD PRACTICE
+        //currentParts[0]["name"] = allParts["01A"]["name"];
+        /*for (int i = 0; i < 5; i++) 
         {
             if (currentParts[i] != null)
             {
@@ -91,7 +93,7 @@ public class MyPlayerData {
                     currentParts[i]["name"] = allParts[i]["name"];
                 }
             }
-        }
+        } */
     }
     public void UnlockParts() //string part
     {
@@ -144,8 +146,10 @@ public class MyPlayerData {
     {
         allPartsPath =  Application.persistentDataPath + "/AllParts.json";
         currentPath = Application.persistentDataPath + "/CurrentParts.json";
-        jsonString = File.ReadAllText(allPartsPath);
-        allParts = (JSONObject)JSON.Parse(jsonString);
+        allPartsJsonString = File.ReadAllText(allPartsPath);
+        allParts = (JSONObject)JSON.Parse(allPartsJsonString);
+        currentPartsJsonString = File.ReadAllText(currentPath);
+        currentParts = (JSONObject)JSON.Parse(currentPartsJsonString);
     }
     
 

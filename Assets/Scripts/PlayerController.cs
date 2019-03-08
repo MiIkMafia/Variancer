@@ -160,8 +160,10 @@ public class PlayerController : MonoBehaviour {
 		xv = GetComponent<PlayerMotor>();	
 
 	    _speed = maxSpeed;
-		data.SetDefaults();
-		data.SetPartValues();
+		data.SetPath();
+		//data.SetDefaults();
+		//data.SetPartValues();
+		//data.Load();
 
 	}
 
@@ -200,8 +202,7 @@ public class PlayerController : MonoBehaviour {
 		else if (currentSpeed < 0)
 
 		{currentSpeed = Mathf.Max(currentSpeed, 0);}
-
-		  
+		
 
 	}
 
@@ -673,7 +674,9 @@ public class PlayerController : MonoBehaviour {
 
 		{velocityCopy = _velocity;}
 
-		
+		print (data.currentParts["head"]["name"]);
+		print(data.allParts[0][0]);
+		  
 
 
 
