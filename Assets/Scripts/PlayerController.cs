@@ -161,9 +161,9 @@ public class PlayerController : MonoBehaviour {
 
 	    _speed = maxSpeed;
 		data.SetPath();
-		//data.SetDefaults();
-		//data.SetPartValues();
-		//data.Load();
+		data.SetDefaults();
+		data.SetPartValues();
+		data.Load();
 
 	}
 
@@ -674,8 +674,12 @@ public class PlayerController : MonoBehaviour {
 
 		{velocityCopy = _velocity;}
 
-		print (data.currentParts["head"]["name"]);
-		print(data.allParts[0][0]);
+		//print (data.currentParts[0]["name"]);
+		print(data.mass);
+		string name = "head";
+		print(data.allParts[0]["mass"].AsFloat);
+		print(data.currentParts[0]["name"]);
+		print (data.currentParts);
 		  
 
 

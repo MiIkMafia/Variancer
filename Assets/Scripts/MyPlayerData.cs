@@ -60,7 +60,7 @@ public class MyPlayerData {
     [SerializeField] public int energy = 0;     // Works as both shield and booster energy
     [SerializeField] public int acceleration = 0;
     [SerializeField] public int energyRegeneration = 0;
-    [SerializeField] public int mass = 0;
+    [SerializeField] public float mass = 0;
     
 //JSON STUFF
     static private string allPartsPath;  
@@ -69,23 +69,30 @@ public class MyPlayerData {
     static string currentPartsJsonString;
     public JSONObject allParts;
     public JSONObject currentParts;
-    
+    public int c;
 
 //FUNCTIONS
     public void SetPartValues()
     {
-        for(int i = 0; i < currentParts.Count; i++) 
+        for (int i = 0; i < currentParts.Count; i++) 
         {
-            string name = currentParts[i];
-            if (allParts[name]["mass"] != null)
-            {mass = mass + allParts[name]["mass"]; }
+            string name = currentParts[i]["name"];
+            for (int j = 0; j < allParts.Count; j++)
+            {
+                if (allParts[j]["name"] == name)
+                {
+                    mass = mass + (float)allParts[j]["mass"];
+                    c++;
+                }    
+            }
+            
         }
     } 
 
     public void SetDefaults()
     {
         //currentParts[0]["name"] = allParts["01A"]["name"];
-        /*for (int i = 0; i < 5; i++) 
+        for (int i = 0; i < 5; i++) 
         {
             if (currentParts[i] != null)
             {
@@ -93,7 +100,7 @@ public class MyPlayerData {
                     currentParts[i]["name"] = allParts[i]["name"];
                 }
             }
-        } */
+        } 
     }
     public void UnlockParts() //string part
     {
