@@ -54,13 +54,18 @@ public class MyPlayerData {
     private string StoolSlot2;
 
 //FINAL MECH VALUES
-    [SerializeField] public int speed = 0;
-    [SerializeField] public int health = 0;
-    [SerializeField] public int shield = 0;     //To be used with non regenerating shield
-    [SerializeField] public int energy = 0;     // Works as both shield and booster energy
-    [SerializeField] public int acceleration = 0;
-    [SerializeField] public int energyRegeneration = 0;
-    [SerializeField] public float mass = 0;
+    public int speed = 0;
+    public int health = 0;     //make arrays prolly
+    public int shield = 0;     //To be used with non regenerating shield
+    public int energyUse = 0;     // Works as both shield and booster energy
+    public int coreEnergy = 0;
+    public int[] energyParts = new int[12];     //ENERGY PER PART
+    public int[] healthParts = new int[12];     //HEALTH PER PART
+    public int[] shieldParts = new int[12];     //SHIELD PER PART
+    public int energyJetpackConsume = 0;
+    public int acceleration = 0;
+    public int energyRegeneration = 0;
+    public float mass = 0;
     
 //JSON STUFF
     static private string allPartsPath;  
@@ -69,9 +74,11 @@ public class MyPlayerData {
     static string currentPartsJsonString;
     public JSONObject allParts;
     public JSONObject currentParts;
-    public int c;
+
 
 //FUNCTIONS
+
+    //FINDS PARTS FROM CURRENTPARTS BY NAME, THEN FIND THEIR VALUES IN ALLPARTS 
     public void SetPartValues()
     {
         for (int i = 0; i < currentParts.Count; i++) 
@@ -79,16 +86,29 @@ public class MyPlayerData {
             string name = currentParts[i]["name"];
             for (int j = 0; j < allParts.Count; j++)
             {
-                if (allParts[j]["name"] == name)
+                if (allParts[j]["name"] == name && allParts[j]["unlocked"] == true)
                 {
-                    mass = mass + (float)allParts[j]["mass"];
-                    c++;
+                    if (allParts[j]["type"] == "Core")
+                    {
+                        coreEnergy = allParts[j]["energy max"];
+                    }
+                    if (allParts[j]["type"] == "JetPack")
+                    {
+                        energyJetpackConsume = allParts[j]["energy consumed"]; 
+                    }
+                    mass = mass + (float)allParts[j]["mass"];                       // ADD MASS TOGETHER
+                    energyUse = energyUse + allParts[j]["energy use"];
+                    energyParts[i] = allParts[j]["energy use"];
+                    healthParts[i] = allParts[j]["health"];
+                    shieldParts[i] = allParts[j]["shield"];
+
                 }    
+                
             }
-            
         }
     } 
 
+    //RUN THIS WHENEVER PLAYER IS CREATED, THEN SET CUSTOM VALUES LATER
     public void SetDefaults()
     {
         //currentParts[0]["name"] = allParts["01A"]["name"];
