@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 [RequireComponent(typeof(PlayerMotor))]
 public class PlayerController : MonoBehaviour {
@@ -83,7 +84,8 @@ public class PlayerController : MonoBehaviour {
 		//energyConsumptionRate
 		energyMax = data.coreEnergy;
 		jetpackEnergyConsumption = data.energyJetpackConsume;
-		deaccelerationMultiplierCopy = 2f;
+		deaccelerationMultiplierCopy = (1- (1000f/ data.mass));
+		print(Path.GetFullPath("./"));
 	}
 	public void Boost()
 	{
@@ -177,7 +179,7 @@ public class PlayerController : MonoBehaviour {
 	public void UnlockParts()
 	{
 		
-		data.UnlockParts();
+		data.UnlockParts("x");
 	}
 	public void ExpendEnergy(float energyToExpend, int mode)
 

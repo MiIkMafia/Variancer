@@ -1,0 +1,126 @@
+    {
+    "01A" : {
+        "type" : "Head",
+        "name" : "RX-78",
+        "health" : "50",
+        "shield" : "00",
+        "energy use" :10, 
+        "energy consumed" : 0,
+        "mass" : "150",
+        "unlocked" : true
+    },
+    "02A" : {
+        "type" : "Torso",
+        "name" : "Phenex",
+        "health" : "60",
+        "shield" : "100",
+        "energy use" :10, 
+        "energy consumed" : 0,
+        "mass" : "150",
+        "unlocked" : false
+    },
+    "03A" : {
+        "type" : "Core",
+        "name" : "00",
+        "health" : "60",
+        "shield" : "100",
+        "energy max" :200, 
+        "energy consumed" : 0,
+        "mass" : "100",
+        "unlocked" : false
+    },
+    "04A" : {
+        "type" : "ArmL",
+        "name" : "Quanta",
+        "health" : "",
+        "shield" : "",
+        "energy use" :10, 
+        "energy consumed" : 0,
+        "mass" : "150",
+        "unlocked" : ""
+    },
+    "05A" : {
+        "type" : "ArmR",
+        "name" : "ace",
+        "health" : "",
+        "shield" : "",
+        "energy use" :"", 
+        "energy consumed" : 0,
+        "mass" : "150",
+        "unlocked" : ""
+    },
+    "06A" : {
+        "type" : "LegL",
+        "name" : "",
+        "health" : "",
+        "shield" : "",
+        "energy use" :"",
+        "energy consumed" : 0,
+        "mass" : "150", 
+        "unlocked" : ""
+    },
+    "07A" : {
+        "type" : "LegR",
+        "name" : "wing",
+        "health" : "",
+        "shield" : "",
+        "energy use" :"", 
+        "energy consumed" : 0,
+        "mass" : " 150",
+        "unlocked" : ""
+    },
+    "09A" : {
+        "type" : "JetPack",
+        "name" : "boost",
+        "health" : "",
+        "shield" : "",
+        "energy use" :"", 
+        "energy consumed" : 0,
+        "mass" : "150",
+        "unlocked" : ""
+    },
+    "10A" : {
+        "type" : "weaponSlot1",
+        "name" : "slot1",
+        "health" : "",
+        "shield" : "",
+        "energy use" :"", 
+        "energy consumed" : 0,
+        "mass" : "150",
+        "unlocked" : ""
+    },
+    "11A" : {
+        "type" : "weaponSlot2",
+        "name" : "slot2",
+        "health" : "",
+        "shield" : "",
+        "energy use" :"", 
+        "energy consumed" : 0,
+        "mass" : "150",
+        "unlocked" : ""
+    },
+    "12A" : {
+        "type" : "weaponSlot3",
+        "name" : "slot3",
+        "health" : "",
+        "shield" : "",
+        "energy use" :"", 
+        "energy consumed" : 0,
+        "mass" : "150",
+        "unlocked" : ""
+    },
+    "13A" : {
+        "type" : "weaponSlot4",
+        "name" : "slot4",
+        "health" : "",
+        "shield" : "",
+        "energy use" :"", 
+        "energy consumed" : 0,
+        "mass" : "100",
+        "unlocked" : ""
+    }
+    
+
+
+
+}

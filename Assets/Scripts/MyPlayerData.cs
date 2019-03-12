@@ -66,6 +66,7 @@ public class MyPlayerData {
     public int acceleration = 0;
     public int energyRegeneration = 0;
     public float mass = 0;
+    public string x;
     
 //JSON STUFF
     static private string allPartsPath;  
@@ -112,7 +113,7 @@ public class MyPlayerData {
     public void SetDefaults()
     {
         //currentParts[0]["name"] = allParts["01A"]["name"];
-        for (int i = 0; i < 5; i++) 
+        for (int i = 0; i < currentParts.Count; i++) 
         {
             if (currentParts[i] != null)
             {
@@ -122,11 +123,9 @@ public class MyPlayerData {
             }
         } 
     }
-    public void UnlockParts() //string part
+    public void UnlockParts(string partID) //string part
     {
-        
-        //take part name, 
-        //allParts[part]["unlocked"] = true;
+        allParts[partID]["unlocked"] = true;
     }
     public void Save()
     {
@@ -168,7 +167,7 @@ public class MyPlayerData {
     }
 
     
-    
+    //CREATE JSON FILE ON EACH PC
     public void SetPath()
     {
         allPartsPath =  Application.persistentDataPath + "/AllParts.json";
@@ -177,6 +176,7 @@ public class MyPlayerData {
         allParts = (JSONObject)JSON.Parse(allPartsJsonString);
         currentPartsJsonString = File.ReadAllText(currentPath);
         currentParts = (JSONObject)JSON.Parse(currentPartsJsonString);
+        
     }
     
 
@@ -187,6 +187,15 @@ public class MyPlayerData {
         return(allParts["01A"]);
         
     }*/
+
+    public void MoveFiles()
+    {
+        string aFileName = "AllParts.json";
+        string cFileName = "CurrentParts.json";
+        string sourcePath = @"C:\Users\Public\TestFolder";
+        string targetPath =  @"C:\Users\Public\TestFolder\SubDir";
+        
+    }
 
     public void UpdateParts()
     {

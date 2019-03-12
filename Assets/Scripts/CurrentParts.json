@@ -1,0 +1,41 @@
+{
+    "head" : 
+    {
+        "name" : ""
+    },
+    "torso" : 
+    {
+        "name" : ""
+    },
+    "core" : 
+    {
+        "name": ""
+    },
+    "armL" : {
+        "name" : ""
+    },
+    "armR" : {
+        "name" : ""
+    },
+    "legL" : {
+        "name" : ""
+    },
+    "legR" : {
+        "name" : ""
+    },
+    "jetpack" : {
+        "name" : ""
+    },
+    "weaponSlot1" : {
+        "name" : ""
+    },
+    "weaponSlot2" : {
+        "name" : ""
+    },
+    "weaponSlot3" : {
+        "name" : ""
+    },
+    "weaponSlot4" : {
+        "name" : ""
+    }
+}

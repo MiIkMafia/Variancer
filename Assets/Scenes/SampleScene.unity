@@ -1408,7 +1408,7 @@ Prefab:
     - target: {fileID: 114791934244273900, guid: e6fe3f09e244a554eb63c7c4ce9b2fc2,
         type: 2}
       propertyPath: lookSensitivity.x
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4288855437861906, guid: e6fe3f09e244a554eb63c7c4ce9b2fc2, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1417,7 +1417,7 @@ Prefab:
     - target: {fileID: 114791934244273900, guid: e6fe3f09e244a554eb63c7c4ce9b2fc2,
         type: 2}
       propertyPath: lookSensitivity.y
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 54922948959673518, guid: e6fe3f09e244a554eb63c7c4ce9b2fc2,
         type: 2}
@@ -1427,7 +1427,7 @@ Prefab:
     - target: {fileID: 114791934244273900, guid: e6fe3f09e244a554eb63c7c4ce9b2fc2,
         type: 2}
       propertyPath: maxSpeed
-      value: 20
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 114791934244273900, guid: e6fe3f09e244a554eb63c7c4ce9b2fc2,
         type: 2}
@@ -1447,7 +1447,7 @@ Prefab:
     - target: {fileID: 114791934244273900, guid: e6fe3f09e244a554eb63c7c4ce9b2fc2,
         type: 2}
       propertyPath: speedMaxLateralModifier
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114791934244273900, guid: e6fe3f09e244a554eb63c7c4ce9b2fc2,
         type: 2}
@@ -1464,6 +1464,11 @@ Prefab:
       propertyPath: xv
       value: 
       objectReference: {fileID: 1236417172}
+    - target: {fileID: 114791934244273900, guid: e6fe3f09e244a554eb63c7c4ce9b2fc2,
+        type: 2}
+      propertyPath: deaccelerationMultiplier
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6fe3f09e244a554eb63c7c4ce9b2fc2, type: 2}
   m_IsPrefabAsset: 0
