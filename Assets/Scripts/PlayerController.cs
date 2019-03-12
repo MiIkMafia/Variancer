@@ -41,7 +41,8 @@ public class PlayerController : MonoBehaviour {
 	private float energyConsumptionRate = 3f; //SET FROM PLAYER PARTS 
 	private float jetpackEnergyConsumption = 0f; //SET FROM PLAYER PARTS 
 	[SerializeField]
-	private float deaccelerationMultiplier = 5f;		//Calculate from mass
+	private float deaccelerationMultiplier = 0f;		//Calculate from mass
+	private float deaccelerationMultiplierCopy = 0f;
 	private float accelerationCopy = 0f;
 	// private float acclerationMassMultiplier = 0f; {ACCELERATION MODIFIER CALCULATED FROM MASS -Current status unknown}
 	private float sideAccelerationMultiplier = 0f; // LESS THAN ZERO, CALCULATE FROM MASS
@@ -67,6 +68,7 @@ public class PlayerController : MonoBehaviour {
 	[SerializeField]
 	private float cameraRotationLimit = 85f;
 	public PlayerMotor xv;
+
 	void Start ()
 	{
 		xv = GetComponent<PlayerMotor>();	
@@ -75,14 +77,13 @@ public class PlayerController : MonoBehaviour {
 		data.SetDefaults();
 		data.SetPartValues();
 		data.Load();
-		speedMassMultiplier = Mathf.Clamp(data.mass,0,1);
 		//dashEnergyDrain ---- Clamp this from data.mass
-		//speedMassMultiplier
-		//acceleration
+		speedMassMultiplier =  1000f/ data.mass;                              //Mass range (1000,1400)
+		acceleration = 1000f/ data.mass;
 		//energyConsumptionRate
 		energyMax = data.coreEnergy;
 		jetpackEnergyConsumption = data.energyJetpackConsume;
-
+		deaccelerationMultiplierCopy = 2f;
 	}
 	public void Boost()
 	{
@@ -90,7 +91,7 @@ public class PlayerController : MonoBehaviour {
  		{
 		maxSpeed = 16f;
 		accelerationCopy = 3* acceleration;
-		deaccelerationMultiplier = 1f;
+		deaccelerationMultiplierCopy = 1f;
 		}
 	}
 	private void CalcTotalMass()
@@ -104,14 +105,25 @@ public class PlayerController : MonoBehaviour {
 		else if (currentSpeed < 0)
 		{currentSpeed = Mathf.Max(currentSpeed, 0);}
 	}
+	
 	public void AccelerationControl()
 	{	
 		float _percentage = (currentSpeed/maxSpeed) * 100f;
-		if (_percentage > 0f && _percentage <= 20f ) { accelerationCopy = acceleration * 0.6f; deaccelerationMultiplier = 9.5f;}
-		else if (_percentage > 20f && _percentage <= 30f ) {accelerationCopy =  acceleration * 0.6f; deaccelerationMultiplier = 8f;}
-		else if (_percentage > 30f && _percentage <= 50f ) {accelerationCopy =  acceleration * 0.6f; deaccelerationMultiplier = 7f; }
-		else if (_percentage > 50f && _percentage <= 100f ) {accelerationCopy = acceleration * 0.6f; deaccelerationMultiplier = 5f;}
-	}
+		if (zMov == 0)
+		{
+			if (_percentage > 0f && _percentage <= 20f ) {deaccelerationMultiplierCopy = deaccelerationMultiplier * speedMassMultiplier * 1f;} //or some constant
+			else if (_percentage > 20f && _percentage <= 30f ) {deaccelerationMultiplierCopy = deaccelerationMultiplier * speedMassMultiplier * 0.8f;}
+			else if (_percentage > 30f && _percentage <= 50f ) {deaccelerationMultiplierCopy = deaccelerationMultiplier * speedMassMultiplier * 0.6f; }
+			else if (_percentage > 50f && _percentage <= 100f ) {deaccelerationMultiplierCopy = deaccelerationMultiplier * speedMassMultiplier * 0.4f;}
+		}
+		else if (zMov != 0)
+		{
+			if (_percentage > 0f && _percentage <= 20f ) {accelerationCopy = acceleration * 0.6f; } 
+			else if (_percentage > 20f && _percentage <= 30f ) {accelerationCopy = acceleration * 0.7f; }
+			else if (_percentage > 30f && _percentage <= 50f ) {accelerationCopy = acceleration * 0.8f; }
+			else if (_percentage > 50f && _percentage <= 100f ) {accelerationCopy = acceleration * 0.9f;}
+		}
+	}	
 	 public void CanMove()
 	{	
 		//OPPOSITE
@@ -133,7 +145,7 @@ public class PlayerController : MonoBehaviour {
 		}
 		else if ((xMov == 0 || zMov == 0) || (canMove == false && currentSpeed >= reflex))
 		{
-			currentSpeed -= deaccelerationMultiplier*accelerationCopy * Time.deltaTime;
+			currentSpeed -= deaccelerationMultiplierCopy*accelerationCopy * Time.deltaTime;
 			if ((xMov != 0 || zMov != 0) && canMove == false && currentSpeed < reflex)
 			{currentSpeed = Mathf.Max(currentSpeed, reflex);}
 			else {currentSpeed = Mathf.Max(currentSpeed, 0); }
@@ -331,26 +343,24 @@ public class PlayerController : MonoBehaviour {
 		LateralAcceleration();
 		// FINAL MOVEMENT VECTOR
 		Vector3 _velocity = (_movHorizontal + _movVertical).normalized * currentSpeed;
-		if (_velocity == Vector3.zero && currentSpeed != 0 && velocityCopy.z == 0)
-		{
-			_velocity = velocityCopy;
-			//print(velocityCopy);
-		}
+		
+
+		if (_velocity == Vector3.zero && currentSpeed != 0 )
+			{
+				_velocity = velocityCopy;
+				print(velocityCopy);
+			}
 		else if (currentSpeed == 0)
-		{
-			_velocity = Vector3.zero;
-		}
+			{
+				_velocity = Vector3.zero;
+			}
 		else 
-		{velocityCopy = _velocity;}
-		//print (data.currentParts[0]["name"]);
-		//print(data.mass);
+			{velocityCopy = _velocity;}
+
 		string name = "head";
-		//print(data.allParts[0]["mass"].AsFloat);
-		//print(data.currentParts[0]["name"]);
-		//print (data.currentParts);
 		//Apply movement
 		if (isDisabled == false)
-		{xv.Move(_velocity);}
+			{xv.Move(_velocity);}
 		//Calculate rotation as a 3D vector (turning around)
 		//ROTATE ACCORDING TO MASS
 		float _yRot = Input.GetAxisRaw("Mouse X");
